@@ -195,3 +195,49 @@ The same mapping, seen from each agent. Use it as the tool and skill list when b
 ## 6. Notes and optional additions
 - **Optional roles** depending on scope: a *Roaster/Roastery Advisor* (if in-house roasting is added, +$48k–$122k plus air permits), a *Beverage Alcohol Advisor* (if beer or wine is served: 2COP license, 2% Miami-Dade F&B tax), and a *Sustainability Advisor* (packaging, waste, sourcing certifications).
 - Legal and tax agents give **research support, not legal or tax advice**. A licensed Florida attorney and CPA should approve their output.
+
+## 7. Implementation in Claude Code
+
+Each role is a project subagent in `.claude/agents/`, and each skill is a project skill in `.claude/skills/<skill-name>/SKILL.md`. Each agent preloads the skills mapped to it in section 3 (frontmatter `skills:` field). See `CLAUDE.md` for usage.
+
+| ID | Role | Agent file |
+|---|---|---|
+| A01 | Engagement Lead (Orchestrator) | `.claude/agents/engagement-lead.md` |
+| A02 | Market & Customer Research Analyst | `.claude/agents/market-research-analyst.md` |
+| A03 | Competitive Intelligence Analyst | `.claude/agents/competitive-intelligence-analyst.md` |
+| A04 | Miami Hispanic Market & Cultural Advisor | `.claude/agents/hispanic-market-cultural-advisor.md` |
+| A05 | Head of Coffee & Beverage Program | `.claude/agents/head-of-coffee.md` |
+| A06 | Food & Pastry Program Advisor | `.claude/agents/food-pastry-advisor.md` |
+| A07 | Site Selection & Commercial Real Estate Advisor | `.claude/agents/site-selection-advisor.md` |
+| A08 | Café Designer / Architect | `.claude/agents/cafe-designer-architect.md` |
+| A09 | Buildout & Construction Project Manager | `.claude/agents/buildout-project-manager.md` |
+| A10 | Permitting & Zoning Expediter | `.claude/agents/permitting-zoning-expediter.md` |
+| A11 | Coffee Equipment & Water Specialist | `.claude/agents/coffee-equipment-specialist.md` |
+| A12 | Restaurant Technology Specialist | `.claude/agents/restaurant-tech-specialist.md` |
+| A13 | Data & Analytics Analyst | `.claude/agents/data-analytics-analyst.md` |
+| A14 | Café Operations Manager | `.claude/agents/cafe-operations-manager.md` |
+| A15 | Green Coffee Sourcing & Supply Chain Specialist | `.claude/agents/coffee-sourcing-specialist.md` |
+| A16 | Food Safety & Health Compliance Specialist | `.claude/agents/food-safety-specialist.md` |
+| A17 | HR & Talent Advisor | `.claude/agents/hr-talent-advisor.md` |
+| A18 | Financial Modeler (FP&A) | `.claude/agents/financial-modeler.md` |
+| A19 | Funding & Capital Advisor | `.claude/agents/funding-capital-advisor.md` |
+| A20 | Accountant & Tax Advisor | `.claude/agents/accountant-tax-advisor.md` |
+| A21 | Business & Corporate Attorney | `.claude/agents/corporate-attorney.md` |
+| A22 | Commercial Lease Attorney | `.claude/agents/lease-attorney.md` |
+| A23 | Insurance & Risk Advisor | `.claude/agents/insurance-risk-advisor.md` |
+| A24 | Brand Strategist | `.claude/agents/brand-strategist.md` |
+| A25 | Digital & Social Media Marketer | `.claude/agents/digital-social-marketer.md` |
+| A26 | PR, Community & Partnerships Manager | `.claude/agents/pr-partnerships-manager.md` |
+| A27 | B2B Sales Lead (Catering & Wholesale) | `.claude/agents/b2b-sales-lead.md` |
+| — | Orchestrator (coordinator: routes questions, runs experts, combines answers) | `.claude/agents/orchestrator.md` |
+| — | Agent Builder (meta agent: creates and improves agents and skills) | `.claude/agents/agent-builder.md` |
+
+**Team-level skills** (in addition to the 39 above):
+| Skill | Purpose | Used by |
+|---|---|---|
+| `orchestrate-experts` | The orchestration procedure: frame, select, run in parallel, collaborate, synthesize | orchestrator; main session via `/consult` |
+| `expert-routing` | Routing table and standard squads | orchestrator, agent-builder |
+| `agent-and-skill-authoring` | Conventions, checklist, and `scripts/validate_team.py` | agent-builder |
+| `consult` | `/consult [question]` runs `orchestrate-experts` in the main conversation | user entry point |
+
+**Role split:** the `orchestrator` handles the mechanics of coordination (routing, briefs, rounds, synthesis). The `engagement-lead` (A01) is the senior strategy expert the orchestrator brings in for go/no-go and cross-domain trade-offs.
