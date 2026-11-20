@@ -13,6 +13,7 @@ This project is a **team of AI expert agents** that advise a consultant on openi
 | `.claude/settings.json` | Sets `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=2` so the orchestrator (a subagent) can spawn experts |
 | `knowledge/<agent-name>/` | One folder per agent (+ `knowledge/shared/`). Each agent reads its folder and `shared/` **before every answer**. Drop documents here |
 | `docs/agent-brains.md` | Each agent's model (opus, sonnet, or haiku), the reason, and its persona (name, voice, working style) |
+| `web/` + `netlify.toml` | React web app to chat with any agent or ask the whole team. Built on Netlify from this repo's agents, skills, and knowledge. See `web/README.md` |
 | `docs/consultations/` | Saved combined answers (`YYYY-MM-DD-<slug>.md`), created on demand |
 | `docs/decision-log.md` | Running log of decisions, created on demand. Every agent reads it |
 | `docs/models/`, `docs/reports/` | Durable financial models and analyses, created on demand |
@@ -39,6 +40,7 @@ Every agent has a **model** (11 opus for strategy, legal, and finance judgment; 
 - **Ask one expert directly:** "Use the financial-modeler subagent to rebuild the P&L at $60/sf rent", or @-mention the agent.
 - **Give an expert documents:** save them in `knowledge/<agent-name>/` (for example, a lease LOI in `knowledge/lease-attorney/`). Documents several experts need, such as the lease, address, or budget, go in `knowledge/shared/`.
 - **Run a whole session as the orchestrator:** `claude --agent orchestrator`
+- **Use it in a browser:** deploy `web/` to Netlify (`web/README.md`). Every push to `main` redeploys it with the latest agents and knowledge.
 - **Grow or fix the team:** "Use agent-builder to add a roastery advisor" or "…to audit the team".
 - **Validate after any change to `.claude/`:**
   ```bash

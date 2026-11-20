@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.netlify/
+# generated at build time from ../.claude, ../knowledge and ../docs
+src/generated/
+server/generated/
