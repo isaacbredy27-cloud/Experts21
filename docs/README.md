@@ -20,6 +20,7 @@ Background research for opening an independent **specialty coffee shop in Miami,
 | 8 | [08-marketing.md](08-marketing.md) | Brand positioning, pre-launch plan, channels, loyalty, bilingual approach | Marketing |
 | 9 | [09-risks.md](09-risks.md) | Ranked risk register with mitigations | All / Risk |
 | — | [expert-roster.md](expert-roster.md) | The 27 expert agents, their one-line job descriptions, and the 39 skills they share | All / Agent builder |
+| — | [how-to-talk-to-your-experts.md](how-to-talk-to-your-experts.md) | Example prompts: multi-expert consultations, single-expert questions, whole-team reviews | You (the consultant) |
 | — | [sources.md](sources.md) | Every source cited, grouped by topic | All |
 
 ## Key findings (TL;DR)
