@@ -105,7 +105,14 @@ claude --agent orchestrator
 
 ---
 
-## 4. Grow or fix the team
+## 4. Give experts your documents
+Save files into `knowledge/<agent-name>/` for one expert, or `knowledge/shared/` for documents several experts need (lease, address, budget). Every agent reads its folder and `shared/` before answering. For example, put the LOI in `knowledge/shared/` and then run:
+```text
+/consult Should we sign the LOI in knowledge/shared? Bring in the experts and tell me what to negotiate.
+```
+Answers are signed by persona (for example "*Marcus, lease-attorney*"). See [`agent-brains.md`](agent-brains.md) for who's who.
+
+## 5. Grow or fix the team
 ```text
 Use the agent-builder subagent to add a roastery advisor for in-house roasting (equipment, air permits, wholesale), wire it into routing, and validate the team.
 ```

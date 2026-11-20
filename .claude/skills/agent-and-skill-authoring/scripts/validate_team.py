@@ -97,6 +97,14 @@ for f in sorted(os.listdir(AGENTS)):
         elif skills[s].get("disable-model-invocation") is True:
             errors.append(f"agent {name}: preloads '{s}', which sets disable-model-invocation")
         used.add(s)
+    if fm.get("model") not in {"opus", "sonnet", "haiku", "fable", "inherit"} and not str(fm.get("model", "")).startswith("claude-"):
+        errors.append(f"agent {name}: missing or invalid model")
+    if not os.path.isfile(os.path.join(ROOT, "knowledge", name, "README.md")):
+        errors.append(f"agent {name}: missing knowledge/{name}/README.md")
+    if f"knowledge/{name}/" not in body:
+        errors.append(f"agent {name}: system prompt doesn't reference its knowledge folder")
+    if "## Personality" not in body:
+        errors.append(f"agent {name}: missing Personality section")
     if len(body.strip()) < 200:
         warnings.append(f"agent {name}: very short system prompt")
     agents[name] = fm

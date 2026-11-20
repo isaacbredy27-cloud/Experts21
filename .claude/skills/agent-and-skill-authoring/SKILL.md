@@ -13,6 +13,7 @@ Based on the official Claude Code docs: https://code.claude.com/docs/en/sub-agen
 - **Experts** use `disallowedTools: Agent` (they can't spawn agents) and inherit all other tools, including web and MCP research tools.
 - Only the **orchestrator** may spawn agents (`tools` includes `Agent`). Nesting goes up to 3 levels by default, and at most 20 subagents can run at once.
 - Body = the system prompt. Expert body sections: Identity, Mission, Responsibilities, Start by reading, Ask other experts about, Output contract, Guardrails.
+- Every agent has a **`model:`** (opus = deep strategy, legal, and finance judgment; sonnet = most specialist work; haiku = fast, simple lookups), a **Personality** section (first name, voice, working style, signature line), and a **Knowledge folder** section telling it to read `knowledge/<agent-name>/` and `knowledge/shared/` before every answer. Copy both sections from an existing agent.
 - Every expert uses the shared **output contract**: Answer · Key numbers (with sources) · Assumptions · Risks · Handoffs · Open questions.
 
 ## Skill files: `.claude/skills/<skill-name>/SKILL.md`
@@ -24,7 +25,7 @@ Based on the official Claude Code docs: https://code.claude.com/docs/en/sub-agen
 ## When adding or changing an agent
 1. Check that no existing agent already covers it (`expert-routing`). Prefer extending over duplicating.
 2. Write the file and reference only existing skills, or create the new skills first.
-3. Update: the `expert-routing` table, `docs/expert-roster.md` (roster + skills mapping), and the agent and skill counts in `CLAUDE.md`.
+3. Create `knowledge/<agent-name>/README.md` (what documents belong there), add the agent to `knowledge/README.md` and `docs/agent-brains.md` (model, why, name, voice, style), then update the `expert-routing` table, `docs/expert-roster.md` (roster + skills mapping), and the agent and skill counts in `CLAUDE.md`.
 4. Keep the total agent count between 10 and 50.
 5. Run the validator:
 ```bash

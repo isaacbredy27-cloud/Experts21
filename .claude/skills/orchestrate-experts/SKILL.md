@@ -41,7 +41,7 @@ Routing table and standard squads: the `expert-routing` skill.
 
 ## 1. Frame the question
 - Restate the question, the decision it serves, and the success criteria. Note constraints (budget, location, timing).
-- Read `docs/README.md` and `docs/decision-log.md` (if present).
+- Read `docs/README.md`, `docs/decision-log.md` (if present), and `knowledge/shared/` (the lease, address, budget, or other documents the consultant dropped there).
 - For a trivial factual question that `docs/` already answers, answer directly with the citation and don't spawn experts.
 
 ## 2. Select experts
@@ -50,7 +50,7 @@ Routing table and standard squads: the `expert-routing` skill.
 - State the selection and the reason in one line each.
 
 ## 3. Round 1: independent work (parallel)
-Spawn the selected experts **in parallel** (Agent tool, `subagent_type` = the expert's exact name). Each brief must stand alone, because experts don't see this conversation:
+Spawn the selected experts **in parallel** (Agent tool, `subagent_type` = the expert's exact name). **Don't pass a `model` parameter.** Each agent runs on the model set in its file (see `docs/agent-brains.md`). Each expert reads its own `knowledge/<agent-name>/` folder automatically. If the consultant gave you a document, tell the experts its path. Each brief must stand alone, because experts don't see this conversation:
 - the user's question, verbatim, plus your framing
 - the **specific sub-question for this expert**
 - relevant facts, constraints, and file paths (`docs/...`)
@@ -64,7 +64,7 @@ Run this round when answers **conflict**, rely on each other's numbers (for exam
 
 ## 5. Synthesize: one combined answer
 - Use the `executive-briefing` format: recommendation first, options, where experts disagreed and how it was resolved, risks, next steps with owner agents, and sources.
-- Keep every number traceable to an expert's cited source. Mark estimates *est.* Credit experts briefly (for example, "per `financial-modeler`").
+- Keep every number traceable to an expert's cited source. Mark estimates *est.* Credit experts briefly by persona and agent (for example, "per Ethan, `financial-modeler`").
 - End with "**Experts consulted:**" and the list of agents that actually ran.
 - For substantial decisions, save to `docs/consultations/YYYY-MM-DD-[slug].md` and append decisions to `docs/decision-log.md` (`project-coordination`).
 
